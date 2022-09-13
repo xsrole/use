@@ -1,0 +1,40 @@
+{
+  "name": "antrioe",
+  "version": "0.0.1",
+  "type": "module",
+  "main": "./dist/core/lib/index.js",
+  "module": "./dist/core/es/index.js",
+  "types": "./dist/core/es",
+  "keywords": [],
+  "author": "antrioe",
+  "files": [
+    "package.json",
+    "README.md",
+    "dist"
+  ],
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/antrioe"
+  },
+  "license": "MIT",
+  "bin": {
+    "antrioe": "./dist"
+  },
+  "scripts": {
+    "dev": "vite",
+    "build": "vue-tsc --noEmit && vite build",
+    "preview": "vite preview",
+    "version:patch": "npm version patch",
+    "publish": "npm run build && npm publish"
+  },
+  "dependencies": {
+    "axios": "^0.27.2",
+    "vue": "^3.2.37"
+  },
+  "devDependencies": {
+    "@vitejs/plugin-vue": "^3.1.0",
+    "typescript": "^4.6.4",
+    "vite": "^3.1.0",
+    "vue-tsc": "^0.40.4"
+  }
+}
