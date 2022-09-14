@@ -1,11 +1,40 @@
-import { UseAxios, UseGet, UsePost, ProgressEvent } from "./index.d";
-import { _calcProgress, _isFunction } from "./helps";
-import axios, {
-  AxiosRequestConfig,
-  AxiosResponse,
-  AxiosError,
-} from "axios";
-import { ref } from "vue";
+import { Ref,ref } from "vue";
+import axios,{ AxiosRequestConfig, AxiosResponse, AxiosError, Method } from "axios";
+import { useTypeOf } from "../";
+export type ProgressEvent = {
+  loaded: number;
+  total: number;
+};
+type Transform<T = any> = (res: AxiosResponse) => T;
+type UseAxiosoOption<REQ = any, RES = any> = {
+  method?: Method;
+  config?: AxiosRequestConfig<REQ>;
+  before?: (config: AxiosRequestConfig<REQ>) => AxiosRequestConfig<REQ>;
+  after?: (response: AxiosResponse<REQ, RES>) => AxiosResponse<REQ, RES>;
+  transform?: boolean | Transform<RES>;
+};
+export type UseAxiosReturns<REQ = any, RES = any> = {
+  loading: Ref<boolean>;
+  error: Ref<boolean>;
+  data: Ref<RES>;
+  uploadProgress: Ref<number>;
+  downloadProgress: Ref<number>;
+  resend: (url?: string, data?: REQ) => void;
+  abort: () => void;
+  onSuccess: (cb: (response: AxiosResponse) => void) => void;
+  onError: (cb: (error: AxiosError) => void) => void;
+};
+export type UseAxios<REQ = any, RES = any> = (
+  url: string,
+  data?: REQ,
+  option?: UseAxiosoOption<RES>
+) => UseAxiosReturns<REQ, RES>;
+
+const _calcProgress = (progressEvent: ProgressEvent) => {
+  const { loaded, total } = progressEvent;
+  return Math.round((loaded / total) * 100) / 100;
+};
+
 const _config: AxiosRequestConfig = {
   baseURL: "",
   // 超时
@@ -15,7 +44,7 @@ const _config: AxiosRequestConfig = {
     "Content-Type": "application/json",
   },
 };
-export const useAxios: UseAxios = (url, data, option) => {
+const useAxios: UseAxios = (url, data, option) => {
   let controller = new AbortController();
   const loading = ref(true);
   const error = ref(false);
@@ -41,7 +70,7 @@ export const useAxios: UseAxios = (url, data, option) => {
   let _onSuccess = (response: AxiosResponse): void => {response};
   let _onError = (error: AxiosError): void => {error};
   const _transform =
-    option?.transform && _isFunction(option?.transform)
+    option?.transform && useTypeOf.isFunction(option?.transform)
       ? option.transform
       : (res: AxiosResponse) => {
           return res.data;
@@ -132,11 +161,5 @@ export const useAxios: UseAxios = (url, data, option) => {
     },
   };
 };
-export const useGet: UseGet = (url, data) => {
-  return useAxios(url, data);
-};
-export const usePost: UsePost = (url, data) => {
-  return useAxios(url, data, {
-    method: "post",
-  });
-};
+
+export default useAxios

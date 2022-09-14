@@ -1,0 +1,54 @@
+{
+  "name": "@xsrole/xsr-use",
+  "version": "0.0.1",
+  "description": "",
+  "type": "module",
+  "main": "./lib/index.js",
+  "module": "./es/index.js",
+  "types": "./types/index.d.ts",
+  "unpkg": "dist/index.es.js",
+  "keywords": [],
+  "author": "xsrole",
+  "files": [
+    "dist",
+		"lib",
+		"es",
+		"types",
+		"metadata.json",
+		"package.json",
+		"README.md"
+  ],
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/xsrole/xsr-use"
+  },
+  "license": "MIT",
+  "bin": {
+    "xsr-use": "./dist/js/index.es.js"
+  },
+  "scripts": {
+    "dev": "vite",
+    "build": "npm run clean && vue-tsc --noEmit && vite build",
+    "build:types": "vue-tsc --noEmit && vite build --mode fullTypes",
+    "type": "tsc -d",
+    "preview": "vite preview",
+    "clean": "rimraf dist lib es",
+    "version:patch": "npm version patch",
+    "publish": "npm run build && npm publish"
+  },
+  "dependencies": {
+    "axios": "^0.27.2",
+    "vue": "^3.2.37"
+  },
+  "devDependencies": {
+    "@types/fs-extra": "^9.0.13",
+    "@vitejs/plugin-vue": "^3.1.0",
+    "fs-extra": "^10.1.0",
+    "rimraf": "^3.0.2",
+    "typescript": "^4.6.4",
+    "vite": "^3.1.0",
+    "vite-plugin-build": "^0.6.0",
+    "vite-plugin-dts": "^1.5.0",
+    "vue-tsc": "^0.40.4"
+  }
+}

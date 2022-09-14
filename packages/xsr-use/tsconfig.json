@@ -29,15 +29,14 @@
     ],
     "skipLibCheck": true,
     "baseUrl": "./",
+    "rootDir": "./",
+    "outDir": "./dist",
     "paths": {
       "~": [
         "."
       ],
       "~/*": [
         "./src/*"
-      ],
-      "@xsrole/xsr-use": [
-        "./packages/xsr-use"
       ],
     },
     "types": []
@@ -52,7 +51,7 @@
   ],
   "references": [
     {
-      "path": "./tsconfig.node.json"
+      "path": "../../tsconfig.node.json"
     }
   ]
 }
