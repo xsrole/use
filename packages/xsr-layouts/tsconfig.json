@@ -22,7 +22,7 @@
     "resolveJsonModule": true,
     "isolatedModules": true,
     "allowSyntheticDefaultImports": true,
-    "declaration": true,
+    // "declaration": true,
     "lib": [
       "ESNext",
       "DOM"
@@ -45,6 +45,8 @@
   "include": [
     "src/**/*.ts",
     "src/**/*.d.ts",
+    "src/**/*.vue",
+    "src/**/*.jsx",
   ],
   "exclude": [
     "node_modules",
