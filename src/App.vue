@@ -1,21 +1,127 @@
 <script setup lang="ts">
+  import { ref } from 'vue';
 // This starter template is using Vue 3 <script setup> SFCs
 // Check out https://vuejs.org/api/sfc-script-setup.html#script-setup
-import HelloWorld from './components/HelloWorld.vue'
-import {useAxios} from '@xsrole/xsr-use'
-const {data,loading} = useAxios('/')
+import Layouts from '../packages/xsr-layouts/src/Layouts.vue';
+const collapsed = ref(false)
+const mode = ref('vertical')
+const header = ref({
+  height:60,
+  fixed:false,
+  show:true
+})
+const footer = ref({
+  height:60,
+  fixed:false,
+  show:true
+})
+const sider = ref({
+  show:true,
+  width:200,
+  collapsedWidth:60
+})
+const handleChangeMode = ()=>{
+  mode.value = mode.value ==='vertical'?'horizontal':'vertical'
+}
 </script>
 
 <template>
-  <div>
-    <a href="https://vitejs.dev" target="_blank">
-      <img src="/vite.svg" class="logo" alt="Vite logo" />
-    </a>
-    <a href="https://vuejs.org/" target="_blank">
-      <img src="./assets/vue.svg" class="logo vue" alt="Vue logo" />
-    </a>
-  </div>
-  <HelloWorld msg="Vite + Vue" />
+  <Layouts :collapsed="collapsed" :mode="mode" :header="header" :footer="footer" :sider="sider">
+    <template #header>
+      <div wfull hfull bg-gray2>
+        header
+      </div>
+    </template>
+    <template #sider>
+      <div wfull hfull bg-gray3>
+        
+      </div>
+    </template>
+    <template #main>
+      <div wfull hfull bg-gray1>
+        <div fixed left="1/2" top="20">
+          <p @click="collapsed = !collapsed">collapsed({{collapsed}})</p>
+          <p @click="handleChangeMode">mode({{mode}})</p>
+          <div>
+            <p>header-height</p>
+            <input type="text" name="" id="" v-model="header.height" >
+            <input type="checkbox" name="" id="" v-model="header.show">
+            <input type="checkbox" name="" id="" v-model="header.fixed">
+          </div>
+          <div>
+            <p>footer-height</p>
+            <input type="text" name="" id="" v-model="footer.height" >
+            <input type="checkbox" name="" id="" v-model="footer.show">
+            <input type="checkbox" name="" id="" v-model="footer.fixed">
+          </div>
+          <div>
+            <p>footer-height</p>
+            <input type="text" name="" id="" v-model="sider.width" >
+            <input type="text" name="" id="" v-model="sider.collapsedWidth" >
+            <input type="checkbox" name="" id="" v-model="sider.show">
+          </div>
+        </div>
+      <p>1</p>
+      <p>1</p>
+      <p>1</p>
+      <p>1</p>
+      <p>1</p>
+      <p>1</p>
+      <p>1</p>
+      <p>1</p>
+      <p>1</p>
+      <p>1</p>
+      <p>1</p>
+      <p>1</p>
+      <p>1</p>
+      <p>1</p>
+      <p>1</p>
+      <p>1</p>
+      <p>1</p>
+      <p>1</p>
+      <p>1</p>
+      <p>1</p>
+      <p>1</p>
+      <p>1</p>
+      <p>1</p>
+      <p>1</p>
+      <p>1</p>
+      <p>1</p>
+      <p>1</p>
+      <p>1</p>
+      <p>1</p>
+      <p>1</p>
+      <p>1</p>
+      <p>1</p>
+      <p>1</p>
+      <p>1</p>
+      <p>1</p>
+      <p>1</p>
+      <p>1</p>
+      <p>1</p>
+      <p>1</p>
+      <p>1</p>
+      <p>1</p>
+      <p>1</p>
+      <p>1</p>
+      <p>1</p>
+      <p>1</p>
+      <p>1</p>
+      <p>1</p>
+      <p>1</p>
+      <p>1</p>
+      <p>1</p>
+      <p>1</p>
+      <p>1</p>
+      <p>1</p>
+      </div>
+    </template>
+    <template #footer>
+      <div wfull hfull bg-gray4>
+        footer
+      </div>
+    </template>
+</Layouts>
 </template>
 
 <style scoped>
