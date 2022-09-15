@@ -18,7 +18,7 @@
     "esModuleInterop": true, // 允许export=导出，由import from 导入
     "moduleResolution": "node", // 模块解析策略，ts默认用node的解析策略，即相对的方式导入
     "jsx": "preserve",
-    "sourceMap": true, // 生成目标文件的sourceMap文件
+    "sourceMap": false, // 生成目标文件的sourceMap文件
     "resolveJsonModule": true,
     "isolatedModules": true,
     "allowSyntheticDefaultImports": true,

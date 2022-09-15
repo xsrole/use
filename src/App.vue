@@ -2,7 +2,7 @@
   import { ref } from 'vue';
 // This starter template is using Vue 3 <script setup> SFCs
 // Check out https://vuejs.org/api/sfc-script-setup.html#script-setup
-import Layouts from '@xsrole/xsr-layouts';
+import Layouts from '../packages/xsr-layouts/src/index';
 const collapsed = ref(false)
 const mode = ref('vertical')
 const header = ref({
@@ -20,13 +20,18 @@ const sider = ref({
   width:200,
   collapsedWidth:60
 })
+const main = ref({
+  contentStyle:{
+    width:'100px'
+  }
+})
 const handleChangeMode = ()=>{
   mode.value = mode.value ==='vertical'?'horizontal':'vertical'
 }
 </script>
 
 <template>
-  <Layouts :collapsed="collapsed" :mode="mode" :header="header" :footer="footer" :sider="sider">
+  <Layouts :collapsed="collapsed" :mode="mode" :header="header" :footer="footer" :sider="sider" :main="main">
     <template #header>
       <div wfull hfull bg-gray2>
         header
@@ -55,10 +60,14 @@ const handleChangeMode = ()=>{
             <input type="checkbox" name="" id="" v-model="footer.fixed">
           </div>
           <div>
-            <p>footer-height</p>
+            <p>sider-height</p>
             <input type="text" name="" id="" v-model="sider.width" >
             <input type="text" name="" id="" v-model="sider.collapsedWidth" >
             <input type="checkbox" name="" id="" v-model="sider.show">
+          </div>
+          <div>
+            <p>main-height</p>
+            <input type="text" name="" id="" v-model="main.contentStyle" >
           </div>
         </div>
       <p>1</p>

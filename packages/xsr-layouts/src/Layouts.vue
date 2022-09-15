@@ -20,8 +20,7 @@ type Props = {
     height: number;
   };
   main?: {
-    fixed: boolean;
-    height: number;
+    contentStyle:StyleValue
   };
 };
 const props = withDefaults(defineProps<Props>(), {
@@ -50,8 +49,7 @@ const props = withDefaults(defineProps<Props>(), {
   },
   main() {
     return {
-      fixed: true,
-      height: 800,
+      contentStyle:{}
     };
   },
 });
@@ -62,9 +60,10 @@ const layoutStyle: StyleValue = {
   boxSizing: 'border-box',
   width: '100%',
   height: '100%',
-  position: 'relative',
+  position: 'fixed',
   display: 'flex',
   flexDirection: 'column',
+  overflowY:'auto',
   transition: 'all .3s',
 };
 const headerStyle = computed(() => {
@@ -72,14 +71,16 @@ const headerStyle = computed(() => {
     width: '100%',
     transition: 'all .5s',
     zIndex: 2,
+    flexShrink:0,
+    minHeight:0
   };
   if (mode?.value === 'vertical') {
     style.paddingLeft = 0;
   }
   if (mode?.value === 'horizontal') {
-    style.paddingLeft = collapsed?.value
+    style.paddingLeft = sider.value.show?collapsed?.value
       ? `${sider?.value?.collapsedWidth}px`
-      : `${sider?.value?.width}px`;
+      : `${sider?.value?.width}px`:0
   }
   style.height = `${header?.value?.height}px`;
   if (header?.value?.fixed) {
@@ -104,8 +105,8 @@ const sideStyle = computed(() => {
     ? `${sider?.value?.collapsedWidth}px`
     : `${sider?.value?.width}px`;
   if (mode?.value === 'vertical') {
-    style.paddingTop = header.value.fixed ? `${header?.value?.height}px` : 0;
-    style.paddingBottom = footer.value.fixed ? `${footer?.value?.height}px` : 0;
+    style.paddingTop = header.value.show?header.value.fixed ? `${header?.value?.height}px` : 0:0
+    style.paddingBottom = footer.value.show?footer.value.fixed ? `${footer?.value?.height}px` : 0:0
   }
   if (mode?.value === 'horizontal') {
     style.paddingTop = 0;
@@ -133,12 +134,15 @@ const mainStyle = computed(() => {
     footer?.value?.fixed && footer?.value?.show
       ? `${footer?.value.height}px`
       : `0`;
+  
   return style;
 });
 const footerStyle = computed(() => {
   let style: StyleValue = {
     width: '100%',
     zIndex: 0,
+    flexShrink:0,
+    minHeight:0,
     transition: 'all .5s',
   };
   style.width = `100%`;
@@ -147,9 +151,9 @@ const footerStyle = computed(() => {
     style.paddingLeft = 0;
   }
   if (mode?.value === 'horizontal') {
-    style.paddingLeft = collapsed?.value
+    style.paddingLeft = sider.value.show?collapsed?.value
       ? `${sider?.value?.collapsedWidth}px`
-      : `${sider?.value?.width}px`;
+      : `${sider?.value?.width}px`:0
   }
   if (footer?.value?.fixed) {
     style.position = 'fixed';
@@ -163,7 +167,7 @@ const footerStyle = computed(() => {
 });
 </script>
 <template>
-  <div class="xsr-layout" :style="layoutStyle">
+  <div class="xsr-layout" :style="[layoutStyle]">
     <div v-if="header.show" class="xsr-layout-header" :style="headerStyle">
       <slot name="header"></slot>
     </div>
@@ -171,8 +175,10 @@ const footerStyle = computed(() => {
       <slot name="sider"></slot>
     </aside>
     <main class="xsr-layout-main" :style="mainStyle">
+      <div :style="main.contentStyle">
       <slot name="main"></slot>
       <slot></slot>
+    </div>
     </main>
     <footer v-if="footer.show" class="xsr-layout-footer" :style="footerStyle">
       <slot name="footer"></slot>
