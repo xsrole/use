@@ -1,23 +1,33 @@
 {
-  "name": "@xsrole/xsr-layouts",
-  "private": false,
+  "name": "xsr-layouts",
   "version": "1.0.0",
   "type": "module",
-  "description": "",
+  "description": "vue3 layouts 布局组件",
   "main": "./dist/index.js",
   "module": "./dist/index.js",
   "types": "./dist/index.d.ts",
   "files": [
+    "package.json",
+    "README.md",
     "dist"
   ],
+  "bin": {
+    "xsr-cli": "./lib/index.js"
+  },
   "scripts": {
     "dev": "vite",
     "build": "tsc && vite build",
     "preview": "vite preview"
   },
-  "keywords": [],
-  "author": "",
-  "license": "ISC",
+  "keywords": [
+    "vue-layouts"
+  ],
+  "author": "xsrole",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/xsrole"
+  },
+  "license": "MIT",
   "devDependencies": {
     "@vitejs/plugin-vue": "^3.1.0",
     "typescript": "^4.8.3",
