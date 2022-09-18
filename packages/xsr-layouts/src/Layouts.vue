@@ -70,7 +70,7 @@ const headerStyle = computed(() => {
   let style: StyleValue = {
     width: '100%',
     transition: 'all .5s',
-    zIndex: 2,
+    zIndex: 1,
     flexShrink:0,
     minHeight:0
   };
@@ -98,7 +98,7 @@ const sideStyle = computed(() => {
     left: 0,
     top: 0,
     bottom: 0,
-    zIndex: 1,
+    zIndex: 2,
     transition: 'all .3s',
   };
   style.width = collapsed?.value
@@ -134,13 +134,13 @@ const mainStyle = computed(() => {
     footer?.value?.fixed && footer?.value?.show
       ? `${footer?.value.height}px`
       : `0`;
-  
+
   return style;
 });
 const footerStyle = computed(() => {
   let style: StyleValue = {
     width: '100%',
-    zIndex: 0,
+    zIndex: 1,
     flexShrink:0,
     minHeight:0,
     transition: 'all .5s',

@@ -1,6 +1,6 @@
 {
   "name": "xsr-layouts",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "type": "module",
   "description": "vue3 layouts 布局组件",
   "main": "./dist/index.js",
@@ -12,12 +12,13 @@
     "dist"
   ],
   "bin": {
-    "xsr-cli": "./lib/index.js"
+    "xsr-layouts": "./dist/index.js"
   },
   "scripts": {
     "dev": "vite",
     "build": "tsc && vite build",
-    "preview": "vite preview"
+    "version:patch": "npm version patch",
+    "publish": "npm publish"
   },
   "keywords": [
     "vue-layouts"
